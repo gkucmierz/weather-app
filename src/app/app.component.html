@@ -1,21 +1,33 @@
 
-<app-dashboard></app-dashboard>
+<mat-drawer-container class="container" autosize>
+  <mat-drawer class="sidenav" mode="side" opened>
 
+    <mat-form-field class="full-width">
+      <mat-label>City</mat-label>
+      <input matInput type="search" placeholder="City" (keyup)="onKey($event)">
+    </mat-form-field>
 
-<input type="search" (keyup)="onKey($event)">
+    <div [hidden]="matchedCities.length > 0">
+      <span *ngIf="searchString === ''">Type city above</span>
+      <span *ngIf="searchString !== ''">Not match!</span>
+    </div>
 
-<div [hidden]="matchedCities.length > 0">
-  <span *ngIf="searchString === ''">Type city above</span>
-  <span *ngIf="searchString !== ''">Not match!</span>
-</div>
+    <mat-list [hidden]="matchedCities.length === 0">
+      <mat-list-item *ngFor="let city of matchedCities">
+        
+        <span (click)="toggleFav(city)" class="fav">
+          <fa-icon [hidden]="isFav(city)" [icon]="farStar"></fa-icon>
+          <fa-icon [hidden]="!isFav(city)" [icon]="fasStar"></fa-icon>
+        </span>
 
-<ul [hidden]="matchedCities.length === 0">
-  <li *ngFor="let city of matchedCities">
-    {{city}}
-    <span (click)="toggleFav(city)">
-      <fa-icon [hidden]="isFav(city)" [icon]="farStar"></fa-icon>
-      <fa-icon [hidden]="!isFav(city)" [icon]="fasStar"></fa-icon>
-    </span>
-  </li>
-</ul>
+        <p matLine>{{city}}</p>
+      </mat-list-item>
+    </mat-list>
 
+  </mat-drawer>
+
+  <mat-drawer-content class="sidenav-content">
+    <app-dashboard></app-dashboard>
+  </mat-drawer-content>
+
+</mat-drawer-container>

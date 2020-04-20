@@ -1,0 +1,26 @@
+
+.container {
+  width: 100vw;
+  height: 100vh;
+}
+
+.sidenav-content {
+  background: #eee;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidenav {
+  background: #ddd;
+  width: 200px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.fav {
+  float: right;
+}
