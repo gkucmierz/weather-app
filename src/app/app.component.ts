@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { normalize } from 'normalize-diacritics';
+import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
+import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
+import { FavouriteService } from './services/favourite.service';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +14,12 @@ export class AppComponent {
   cities = [];
   matchedCities = [];
   searchString = '';
+  fasStar = fasStar;
+  farStar = farStar;
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private favourite: FavouriteService) {
 
     this.http.get('./assets/world-cities.json')
       .subscribe(cities => {
@@ -25,7 +32,6 @@ export class AppComponent {
 
         this.showCities();
       });
-
   }
 
   onKey(event) {
@@ -38,10 +44,18 @@ export class AppComponent {
   showCities() {
     const matched = this.cities
       .filter(([normalized]) => normalized.includes(this.searchString))
-      .slice(0, 100)
-      .map(([_, city]) => city);
+      .map(([_, city]) => city)
+      .slice(0, 100);
 
     this.matchedCities = matched;
+  }
+
+  toggleFav(city) {
+    this.favourite.toggleCity(city);
+  }
+
+  isFav(city) {
+    return this.favourite.includes(city);
   }
 
 }

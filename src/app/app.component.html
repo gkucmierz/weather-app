@@ -5,9 +5,14 @@
   <span *ngIf="searchString === ''">Type city above</span>
   <span *ngIf="searchString !== ''">Not match!</span>
 </div>
+
 <ul [hidden]="matchedCities.length === 0">
   <li *ngFor="let city of matchedCities">
     {{city}}
+    <span (click)="toggleFav(city)">
+      <fa-icon [hidden]="isFav(city)" [icon]="farStar"></fa-icon>
+      <fa-icon [hidden]="!isFav(city)" [icon]="fasStar"></fa-icon>
+    </span>
   </li>
 </ul>
 
