@@ -1,12 +1,22 @@
 
-<h3>Your Cities</h3>
+<div class="container">
+  <h3>Your Cities</h3>
 
-<ul [hidden]="favourites.length > 0">
-  There are no any cities selected
-</ul>
+  <ul [hidden]="favourites.length > 0">
+    There are no any cities selected
+  </ul>
 
-<ul [hidden]="favourites.length === 0">
-  <li *ngFor="let city of favourites">
-    {{city}}
-  </li>
-</ul>
+  <div [hidden]="favourites.length === 0" class="cards">
+    <mat-card *ngFor="let city of favourites" class="card">
+      
+      <mat-card-title>{{ city }}</mat-card-title>
+
+      <mat-card-content>
+        <p>Temp: {{ getCityWeather(city, 'temp') }}°C</p>
+        <p>Humidity: {{ getCityWeather(city, 'humidity') }}%</p>
+        <p>{{ getCityWeather(city, 'description') }}</p>
+      </mat-card-content>
+
+    </mat-card>
+  </div>
+</div>

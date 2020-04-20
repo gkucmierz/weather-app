@@ -15,7 +15,7 @@
     <mat-list [hidden]="matchedCities.length === 0">
       <mat-list-item *ngFor="let city of matchedCities">
         
-        <span (click)="toggleFav(city)" class="fav">
+        <span (click)="toggleFav(city)">
           <fa-icon [hidden]="isFav(city)" [icon]="farStar"></fa-icon>
           <fa-icon [hidden]="!isFav(city)" [icon]="fasStar"></fa-icon>
         </span>
