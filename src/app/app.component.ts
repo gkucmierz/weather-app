@@ -16,7 +16,13 @@ export class AppComponent {
 
     this.http.get('./assets/world-cities.json')
       .subscribe(cities => {
-        this.cities = cities;
+        this.cities = cities.map(([normalized, original]) => {
+          if (original) {
+            return [normalized.toLowerCase(), original];
+          }
+          return [normalized.toLowerCase(), normalized];
+        })
+
         this.showCities();
       });
 
@@ -31,10 +37,9 @@ export class AppComponent {
 
   showCities() {
     const matched = this.cities
-      .map(city => ({city, lc: city.toLowerCase()}))
-      .filter(({lc}) => lc.includes(this.searchString))
+      .filter(([normalized]) => normalized.includes(this.searchString))
       .slice(0, 100)
-      .map(({city}) => city);
+      .map(([_, city]) => city);
 
     this.matchedCities = matched;
   }
