@@ -1,0 +1,12 @@
+
+<h3>Your Cities</h3>
+
+<ul [hidden]="favourites.length > 0">
+  There are no any cities selected
+</ul>
+
+<ul [hidden]="favourites.length === 0">
+  <li *ngFor="let city of favourites">
+    {{city}}
+  </li>
+</ul>
