@@ -23,11 +23,11 @@ export class AppComponent {
 
     this.http.get('./assets/world-cities.json')
       .subscribe(cities => {
-        this.cities = cities.map(([normalized, original]) => {
-          if (original) {
+        this.cities = cities.map(([original, normalized]) => {
+          if (normalized) {
             return [normalized.toLowerCase(), original];
           }
-          return [normalized.toLowerCase(), normalized];
+          return [original.toLowerCase(), original];
         })
 
         this.showCities();
