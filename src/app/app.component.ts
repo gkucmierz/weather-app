@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { normalize } from 'normalize-diacritics';
 
 @Component({
   selector: 'app-root',
@@ -22,8 +23,10 @@ export class AppComponent {
   }
 
   onKey(event) {
-    this.searchString = event.target.value;
-    this.showCities();
+    normalize(event.target.value).then(str => {
+      this.searchString = str.toLowerCase();
+      this.showCities();
+    });
   }
 
   showCities() {
