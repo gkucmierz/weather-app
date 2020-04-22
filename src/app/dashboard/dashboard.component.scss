@@ -1,19 +1,19 @@
 
-$margin: 10px;
+$margin: 20px;
 $tile-size: 140px;
 
 .container {
   margin: $margin;
 }
 
-.cards {
+.tiles {
   margin: 0 -$margin 0 -$margin;
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
 }
 
-.card {
+.tile {
   margin: $margin;
   width: $tile-size;
   height: $tile-size;

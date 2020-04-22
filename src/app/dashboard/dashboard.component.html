@@ -6,17 +6,7 @@
     There are no any cities selected
   </ul>
 
-  <div [hidden]="favourites.length === 0" class="cards">
-    <mat-card *ngFor="let city of favourites" class="card">
-      
-      <mat-card-title>{{ city }}</mat-card-title>
-
-      <mat-card-content>
-        <p>Temp: {{ getCityWeather(city, 'temp') }}°C</p>
-        <p>Humidity: {{ getCityWeather(city, 'humidity') }}%</p>
-        <p>{{ getCityWeather(city, 'description') }}</p>
-      </mat-card-content>
-
-    </mat-card>
+  <div [hidden]="favourites.length === 0" class="tiles">
+    <app-tile *ngFor="let city of favourites" class="tile" [city]="city"></app-tile>
   </div>
 </div>
