@@ -1,5 +1,7 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { WeatherService } from '../../services/weather.service';
+import { Router } from '@angular/router';
+import { UtilsService } from '../../services/utils.service';
 
 @Component({
   selector: 'app-tile',
@@ -11,10 +13,17 @@ export class TileComponent implements OnInit, OnChanges {
   city: string;
   data = {};
 
-  constructor(private weather: WeatherService) { }
+  constructor(
+    private weather: WeatherService,
+    private router: Router,
+    private utils: UtilsService) { }
 
   ngOnChanges() {
     this.weather.getShort(this.city).subscribe(data => this.data = data);
+  }
+
+  redirect(city) {
+    this.utils.urlNormalize(city).then(url => this.router.navigate(['/city', url]));
   }
 
   ngOnInit() {

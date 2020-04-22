@@ -12,7 +12,7 @@
 <mat-list [hidden]="matchedCities.length === 0">
   <mat-list-item
     matRipple 
-    [routerLink]="['/city', city]"
+    (click)=redirect(city)
     class="list-item"
     *ngFor="let city of matchedCities">
     
@@ -21,6 +21,6 @@
       <fa-icon [hidden]="!isFav(city)" [icon]="fasStar"></fa-icon>
     </span>
 
-    <p matLine>{{city}}</p>
+    <p matLine>{{ city }}</p>
   </mat-list-item>
 </mat-list>

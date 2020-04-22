@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { normalize } from 'normalize-diacritics';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
 import { FavouriteService } from '../services/favourite.service';
+import { Router } from '@angular/router';
+import { UtilsService } from './../services/utils.service';
+
 
 @Component({
   selector: 'app-sidenav',
@@ -19,7 +21,9 @@ export class SidenavComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private favourite: FavouriteService) {
+    private favourite: FavouriteService,
+    private router: Router,
+    private utils: UtilsService) {
 
     this.http.get('./assets/world-cities.json')
       .subscribe(cities => {
@@ -35,7 +39,7 @@ export class SidenavComponent implements OnInit {
   }
 
   onKey(event) {
-    normalize(event.target.value).then(str => {
+    this.utils.normalizeDiacritics(event.target.value).then(str => {
       this.searchString = str.toLowerCase();
       this.showCities();
     });
@@ -57,6 +61,10 @@ export class SidenavComponent implements OnInit {
 
   isFav(city) {
     return this.favourite.includes(city);
+  }
+
+  redirect(city) {
+    this.utils.urlNormalize(city).then(url => this.router.navigate(['/city', url]));
   }
 
   ngOnInit() {
