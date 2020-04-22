@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnChanges, Input } from '@angular/core';
 import { WeatherService } from '../../services/weather.service';
 import { Router } from '@angular/router';
 import { UtilsService } from '../../services/utils.service';
-import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { FavouriteService } from '../../services/favourite.service';
 import { SubSink } from 'subsink';
 
@@ -15,8 +14,7 @@ export class TileComponent implements OnDestroy, OnChanges {
   private subs = new SubSink();
   @Input()
   city: string;
-  data = {};
-  faTrashAlt = faTrashAlt;
+  data: any = {};
 
   constructor(
     private weather: WeatherService,

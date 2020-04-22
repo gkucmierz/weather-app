@@ -1,4 +1,6 @@
-version: 2
+version: 2.1
+orbs:
+    firebase-deploy: azdevs/firebase-deploy@1.0.0
 jobs:
     build:
         working_directory: ~/project
@@ -47,22 +49,18 @@ jobs:
                     - package.json
                     - firebase.json
                     - .firebaserc
+
     deploy:
+        description: Deploy to Firebase
         docker:
-            - image: circleci/node:chakracore-8.11-browsers-legacy
-        working_directory: ~/project
+            - image: 'circleci/node:lts'
         steps:
             - run:
-                name: Show current branch
-                command: echo ${CIRCLE_BRANCH}
-            - restore_cache:
-                key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+                    name: Install Firebase Tools
+                    command: npm install firebase-tools
             - run:
-                name: Install Firebase
-                command: npm install --save-dev firebase-tools
-            - run:
-                name: Deploy Master to Firebase
-                command: npm run firebase-deploy
+                    name: Deploy to Firebase
+                    command: npm run deploy
 
 workflows:
     version: 2
