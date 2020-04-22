@@ -18,8 +18,8 @@ export class WeatherService {
 
   getForecast(city) {
     return this.getDetails(city).pipe(
-      mergeMap(data => {
-        const url = `https://samples.openweathermap.org/data/2.5/forecast?id=${data.id}&appid=${apiToken}`;
+      mergeMap((data: any) => {
+        const url = `https://samples.openweathermap.org/data/2.5/forecast?id=${data['id']}&appid=${apiToken}`;
         return this.http.get(url);
       })
     );
@@ -27,7 +27,7 @@ export class WeatherService {
 
   getShort(city) {
     return this.getDetails(city).pipe(
-      map(weather => {
+      map((weather: any) => {
         const temp = Math.round(this.kelvinToCelsius(weather.main.temp));
         const humidity = weather.main.humidity;
         const description = weather.weather[0].description;

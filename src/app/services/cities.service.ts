@@ -15,7 +15,7 @@ export class CitiesService {
 
   getCities() {
     return this.http.get('./assets/world-cities.json').pipe(
-      map(cities => {
+      map((cities: any) => {
         return this.cities = cities.map(([original, normalized]) => {
           if (normalized) {
             return [normalized.toLowerCase(), original];
