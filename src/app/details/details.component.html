@@ -1,4 +1,26 @@
 
-<h3>Weather in {{city}}</h3>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>
+      <h3>
+        Weather in {{city}}
+        <span (click)="toggleFav(city, $event)">
+          <fa-icon [hidden]="isFav(city)" [icon]="farStar"></fa-icon>
+          <fa-icon [hidden]="!isFav(city)" [icon]="fasStar"></fa-icon>
+        </span>
+      </h3>
+    </span>
 
-<pre>{{ detailedWeather | json }}</pre>
+    <span class="spacer"></span>
+
+    <div class="toolbar-icon" routerLink="/">
+      <button mat-mini-fab aria-label="Go to dashboard">
+        <fa-icon [icon]="faHome"></fa-icon>
+      </button>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-card>
+  <pre>{{ detailedWeather | json }}</pre>
+</mat-card>

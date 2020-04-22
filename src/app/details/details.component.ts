@@ -3,6 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { WeatherService } from '../services/weather.service';
 import { mergeMap } from 'rxjs/operators';
 import { CitiesService } from '../services/cities.service';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
+import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
+import { FavouriteService } from '../services/favourite.service';
 
 @Component({
   selector: 'app-details',
@@ -13,11 +17,23 @@ export class DetailsComponent implements OnInit {
   urlCity = '';
   city = '';
   detailedWeather = {};
+  faHome = faHome;
+  fasStar = fasStar;
+  farStar = farStar;
 
   constructor(
     private route: ActivatedRoute,
     private weather: WeatherService,
-    private cities: CitiesService) {}
+    private cities: CitiesService,
+    private favourite: FavouriteService) {}
+
+  toggleFav(city) {
+    this.favourite.toggleCity(city);
+  }
+
+  isFav(city) {
+    return this.favourite.includes(city);
+  }
 
   ngOnInit() {
     this.route.params.pipe(
