@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { WeatherService } from '../services/weather.service';
+import { mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-details',
@@ -8,12 +10,20 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetailsComponent implements OnInit {
   city = '';
+  detailedWeather = {};
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private weather: WeatherService) {}
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.city = params['city'];
+    this.route.params.pipe(
+      mergeMap(params => {
+        this.city = params['city'];
+        return this.weather.getDetails(this.city);
+      })
+    ).subscribe(weather => {
+      this.detailedWeather = weather;
     });
   }
 

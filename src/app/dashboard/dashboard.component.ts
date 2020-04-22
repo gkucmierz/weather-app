@@ -15,11 +15,6 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  getCityWeather(city, param) {
-    const data = this.weatherData.get(city);
-    return data && data[param] || '';
-  }
-
   ngOnInit() {
   }
 
