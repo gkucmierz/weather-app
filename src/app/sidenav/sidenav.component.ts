@@ -26,8 +26,8 @@ export class SidenavComponent implements OnInit {
     private utils: UtilsService,
     private cities: CitiesService) {
 
-    this.cities.getCities().subscribe(cities => {
-      this.citiesList = cities;
+    this.cities.getCities().subscribe(list => {
+      this.citiesList = list;
       this.showCities();
     });
   }

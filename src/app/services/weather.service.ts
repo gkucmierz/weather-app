@@ -19,7 +19,7 @@ export class WeatherService {
   getForecast(city) {
     return this.getDetails(city).pipe(
       mergeMap((data: any) => {
-        const url = `https://samples.openweathermap.org/data/2.5/forecast?id=${data['id']}&appid=${apiToken}`;
+        const url = `https://samples.openweathermap.org/data/2.5/forecast?id=${data.id}&appid=${apiToken}`;
         return this.http.get(url);
       })
     );

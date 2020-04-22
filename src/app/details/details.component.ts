@@ -38,7 +38,7 @@ export class DetailsComponent implements OnInit {
   ngOnInit() {
     this.route.params.pipe(
       mergeMap(params => {
-        this.urlCity = params['city'];
+        this.urlCity = params.city;
         return this.cities.matchCity(this.urlCity).pipe(
           mergeMap(([normalized, city]) => {
             this.city = city;

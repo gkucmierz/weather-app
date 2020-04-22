@@ -14,7 +14,7 @@ export class FavouriteService {
 
   addCity(city) {
     if (!this.cities.includes(city)) {
-      this.cities.push(city); 
+      this.cities.push(city);
     }
     this.saveCities();
   }
@@ -42,7 +42,7 @@ export class FavouriteService {
         try {
           const cities = JSON.parse(citiesJson);
           return Array.isArray(cities) && cities || [];
-        } catch(e) {
+        } catch (e) {
           return [];
         }
       }),
