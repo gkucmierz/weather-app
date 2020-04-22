@@ -30,8 +30,8 @@
     *ngFor="let city of matchedCities">
     
     <span (click)="toggleFav(city, $event)">
-      <fa-icon [hidden]="isFav(city)" [icon]="farStar"></fa-icon>
-      <fa-icon [hidden]="!isFav(city)" [icon]="fasStar"></fa-icon>
+      <mat-icon *ngIf="!isFav(city)">star_outline</mat-icon>
+      <mat-icon *ngIf="isFav(city)">star</mat-icon>
     </span>
 
     <p matLine>{{ city }}</p>

@@ -6,7 +6,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpErrorInterceptor } from './http-error.interceptor';
 import { StorageModule } from '@ngx-pwa/local-storage';
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -40,7 +39,6 @@ import { ErrorComponent } from './dialogs/error/error.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FontAwesomeModule,
     StorageModule.forRoot({ IDBNoWrap: true }),
     BrowserAnimationsModule,
     MatFormFieldModule,

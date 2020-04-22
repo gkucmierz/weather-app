@@ -3,9 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { WeatherService } from '../services/weather.service';
 import { mergeMap } from 'rxjs/operators';
 import { CitiesService } from '../services/cities.service';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
-import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
-import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
 import { FavouriteService } from '../services/favourite.service';
 import { SubSink } from 'subsink';
 
@@ -19,9 +16,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
   urlCity = '';
   city = '';
   detailedWeather = {};
-  faHome = faHome;
-  fasStar = fasStar;
-  farStar = farStar;
 
   constructor(
     private route: ActivatedRoute,

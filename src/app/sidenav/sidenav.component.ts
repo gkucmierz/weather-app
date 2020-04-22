@@ -1,6 +1,4 @@
 import { Component, OnDestroy } from '@angular/core';
-import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
-import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
 import { FavouriteService } from '../services/favourite.service';
 import { Router } from '@angular/router';
 import { UtilsService } from '../services/utils.service';
@@ -21,8 +19,6 @@ export class SidenavComponent implements OnDestroy {
   citiesList = [];
   matchedCities = [];
   searchString = '';
-  fasStar = fasStar;
-  farStar = farStar;
   isGeolocated = false;
   geoLoading = false;
 
@@ -35,19 +31,19 @@ export class SidenavComponent implements OnDestroy {
 
     this.subs.sink = this.cities.getCities().subscribe(list => {
       this.citiesList = list;
-      this.showCities();
+      this.filterCities();
     });
   }
 
   onKey(event) {
     this.utils.normalizeDiacritics(event.target.value).then(str => {
       this.searchString = str.toLowerCase();
-      this.showCities();
+      this.filterCities();
     });
     this.isGeolocated = false;
   }
 
-  showCities() {
+  filterCities() {
     const phrase = this.searchString;
     const matched = this.citiesList
       .filter(([normalized]) => normalized.includes(phrase))
@@ -78,7 +74,8 @@ export class SidenavComponent implements OnDestroy {
       this.isGeolocated = true;
       this.geoLoading = false;
       this.visibleCity = city;
-      this.showCities();
+      this.searchString = city;
+      this.filterCities();
     });
     this.visibleCity = '';
     this.geoLoading = true;

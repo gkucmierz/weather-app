@@ -4,10 +4,10 @@
     <span>
       <h3>
         Weather in {{city}}
-        <span (click)="toggleFav(city, $event)">
-          <fa-icon [hidden]="isFav(city)" [icon]="farStar"></fa-icon>
-          <fa-icon [hidden]="!isFav(city)" [icon]="fasStar"></fa-icon>
-        </span>
+        <button mat-icon-button color="accent" (click)="toggleFav(city)">
+          <mat-icon *ngIf="!isFav(city)">star_outline</mat-icon>
+          <mat-icon *ngIf="isFav(city)">star</mat-icon>
+        </button>
       </h3>
     </span>
 
@@ -15,7 +15,7 @@
 
     <div class="toolbar-icon" routerLink="/">
       <button mat-mini-fab aria-label="Go to dashboard">
-        <fa-icon [icon]="faHome"></fa-icon>
+        <mat-icon>home</mat-icon>
       </button>
     </div>
   </mat-toolbar-row>
