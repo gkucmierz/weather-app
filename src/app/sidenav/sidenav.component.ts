@@ -46,7 +46,7 @@ export class SidenavComponent implements OnDestroy {
     const matched = this.citiesList
       .filter(([normalized]) => normalized.includes(phrase))
       .sort((a, b) => {
-        return (b[0] === phrase) - (a[0] === phrase);
+        return +(b[0] === phrase) - +(a[0] === phrase);
       })
       .map(([_, city]) => city)
       .slice(0, MAX_VISIBLE_CITIES);
