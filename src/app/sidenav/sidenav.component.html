@@ -6,9 +6,14 @@
     placeholder="City"
     (keyup)="onKey($event)"
     [ngModel]="visibleCity">
-  <button mat-button matSuffix mat-icon-button aria-label="Geolocation">
-    <mat-icon *ngIf="!isGeolocated" (click)="locate()">gps_not_fixed</mat-icon>
-    <mat-icon *ngIf="isGeolocated" (click)="locate()">gps_fixed</mat-icon>
+  <button mat-button
+    matSuffix
+    mat-icon-button
+    aria-label="Geolocation"
+    [disabled]="geoLoading">
+    <mat-icon *ngIf="!geoLoading && !isGeolocated" (click)="locate()">gps_not_fixed</mat-icon>
+    <mat-icon *ngIf="!geoLoading && isGeolocated" (click)="locate()">gps_fixed</mat-icon>
+    <mat-icon *ngIf="geoLoading">hourglass_empty</mat-icon>
   </button>
 </mat-form-field>
 

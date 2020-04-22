@@ -24,6 +24,7 @@ export class SidenavComponent implements OnDestroy {
   fasStar = fasStar;
   farStar = farStar;
   isGeolocated = false;
+  geoLoading = false;
 
   constructor(
     private favourite: FavouriteService,
@@ -75,10 +76,12 @@ export class SidenavComponent implements OnDestroy {
   locate() {
     this.geolocation.locate().subscribe(city => {
       this.isGeolocated = true;
+      this.geoLoading = false;
       this.visibleCity = city;
       this.showCities();
     });
     this.visibleCity = '';
+    this.geoLoading = true;
   }
 
   ngOnDestroy() {
