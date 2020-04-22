@@ -1,7 +1,9 @@
 
 <mat-card class="card">
   
-  <mat-card-title>{{ city }}</mat-card-title>
+  <mat-card-title [routerLink]="['/city', city]">
+    {{ city }}
+  </mat-card-title>
 
   <mat-card-content>
     <p>Temp: {{ data.temp }}°C</p>

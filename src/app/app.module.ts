@@ -17,13 +17,15 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TileComponent } from './dashboard/tile/tile.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { DetailsComponent } from './details/details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     TileComponent,
-    SidenavComponent
+    SidenavComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,
