@@ -1,0 +1,20 @@
+[debug] [2020-04-22T21:23:27.371Z] ----------------------------------------------------------------------
+[debug] [2020-04-22T21:23:27.372Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2020-04-22T21:23:27.373Z] CLI Version:   6.10.0
+[debug] [2020-04-22T21:23:27.373Z] Platform:      darwin
+[debug] [2020-04-22T21:23:27.373Z] Node Version:  v12.13.1
+[debug] [2020-04-22T21:23:27.373Z] Time:          Wed Apr 22 2020 23:23:27 GMT+0200 (GMT+02:00)
+[debug] [2020-04-22T21:23:27.373Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2020-04-22T21:23:27.384Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-04-22T21:23:27.385Z] > authorizing via signed-in user
+[debug] [2020-04-22T21:23:27.385Z] [iam] checking project weather-app-fcdce for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2020-04-22T21:23:27.386Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-04-22T21:23:27.386Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-04-22T21:23:27.762Z] <<< HTTP RESPONSE 200
+[debug] [2020-04-22T21:23:27.776Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/weather-app-fcdce:testIamPermissions  
+
+[debug] [2020-04-22T21:23:29.055Z] <<< HTTP RESPONSE 200
+[debug] [2020-04-22T21:23:29.056Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/weather-app-fcdce  
+ 

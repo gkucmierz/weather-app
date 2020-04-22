@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, mergeMap } from 'rxjs/operators';
-
-const apiToken = '99ce29fbba502bbfa7c327a81a4b102d';
+import { API_TOKEN } from '../config';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +11,14 @@ export class WeatherService {
   constructor(private http: HttpClient) { }
 
   getDetails(city) {
-    const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiToken}`;
+    const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_TOKEN}`;
     return this.http.get(url);
   }
 
   getForecast(city) {
     return this.getDetails(city).pipe(
       mergeMap((data: any) => {
-        const url = `https://samples.openweathermap.org/data/2.5/forecast?id=${data['id']}&appid=${apiToken}`;
+        const url = `https://samples.openweathermap.org/data/2.5/forecast?id=${data.id}&appid=${API_TOKEN}`;
         return this.http.get(url);
       })
     );

@@ -1,9 +1,10 @@
 
 <mat-card class="card" (click)="redirect(city)">
 
-  <fa-icon class="trash-icon"
-    [icon]="faTrashAlt"
-    (click)="removeFav(city, $event)"></fa-icon>
+  <mat-icon class="trash-icon"
+    (click)="removeFav(city, $event)">
+    delete_outline
+  </mat-icon>
   
   <mat-card-title>
     <span>{{ city }}</span>

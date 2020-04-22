@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpErrorInterceptor } from './http-error.interceptor';
 import { StorageModule } from '@ngx-pwa/local-storage';
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -16,6 +16,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatRippleModule} from '@angular/material/core';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,7 +39,6 @@ import { ErrorComponent } from './dialogs/error/error.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FontAwesomeModule,
     StorageModule.forRoot({ IDBNoWrap: true }),
     BrowserAnimationsModule,
     MatFormFieldModule,
@@ -50,6 +50,8 @@ import { ErrorComponent } from './dialogs/error/error.component';
     MatRippleModule,
     MatDialogModule,
     MatToolbarModule,
+    MatIconModule,
+    FormsModule,
   ],
   providers: [
    {
