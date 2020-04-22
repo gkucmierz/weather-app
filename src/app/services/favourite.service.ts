@@ -21,7 +21,7 @@ export class FavouriteService {
 
   toggleCity(city) {
     if (!this.cities.includes(city)) {
-      this.cities.push(city); 
+      this.cities.push(city);
     } else {
       this.cities.splice(this.cities.indexOf(city), 1);
     }

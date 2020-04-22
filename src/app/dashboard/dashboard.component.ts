@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
     const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=99ce29fbba502bbfa7c327a81a4b102d`;
 
     this.http.get(url).subscribe(weather => {
-      const temp = Math.round(weather.main.temp - 272.15);
+      const temp = Math.round(this.kelvinToCelsius(weather.main.temp));
       const humidity = weather.main.humidity;
       const description = weather.weather[0].description;
 
@@ -35,8 +35,13 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  kelvinToCelsius(kelvin) {
+    return kelvin - 272.15;
+  }
+
   getCityWeather(city, param) {
-    return this.weatherData.get(city)[param];
+    const data = this.weatherData.get(city);
+    return data && data[param] || '';
   }
 
   ngOnInit() {
