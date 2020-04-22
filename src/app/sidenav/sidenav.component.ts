@@ -3,9 +3,10 @@ import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
 import { FavouriteService } from '../services/favourite.service';
 import { Router } from '@angular/router';
-import { UtilsService } from './../services/utils.service';
+import { UtilsService } from '../services/utils.service';
 import { CitiesService } from '../services/cities.service';
 import { SubSink } from 'subsink';
+import { GeolocationService } from '../services/geolocation.service';
 
 const MAX_VISIBLE_CITIES = 100;
 
@@ -16,17 +17,20 @@ const MAX_VISIBLE_CITIES = 100;
 })
 export class SidenavComponent implements OnDestroy {
   private subs = new SubSink();
+  visibleCity = '';
   citiesList = [];
   matchedCities = [];
   searchString = '';
   fasStar = fasStar;
   farStar = farStar;
+  isGeolocated = false;
 
   constructor(
     private favourite: FavouriteService,
     private router: Router,
     private utils: UtilsService,
-    private cities: CitiesService) {
+    private cities: CitiesService,
+    private geolocation: GeolocationService) {
 
     this.subs.sink = this.cities.getCities().subscribe(list => {
       this.citiesList = list;
@@ -39,6 +43,7 @@ export class SidenavComponent implements OnDestroy {
       this.searchString = str.toLowerCase();
       this.showCities();
     });
+    this.isGeolocated = false;
   }
 
   showCities() {
@@ -65,6 +70,15 @@ export class SidenavComponent implements OnDestroy {
 
   redirect(city) {
     this.utils.urlNormalize(city).then(url => this.router.navigate(['/city', url]));
+  }
+
+  locate() {
+    this.geolocation.locate().subscribe(city => {
+      this.isGeolocated = true;
+      this.visibleCity = city;
+      this.showCities();
+    });
+    this.visibleCity = '';
   }
 
   ngOnDestroy() {

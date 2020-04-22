@@ -1,7 +1,15 @@
 
 <mat-form-field class="full-width">
   <mat-label>City</mat-label>
-  <input matInput type="search" placeholder="City" (keyup)="onKey($event)">
+  <input matInput
+    type="search"
+    placeholder="City"
+    (keyup)="onKey($event)"
+    [ngModel]="visibleCity">
+  <button mat-button matSuffix mat-icon-button aria-label="Geolocation">
+    <mat-icon *ngIf="!isGeolocated" (click)="locate()">gps_not_fixed</mat-icon>
+    <mat-icon *ngIf="isGeolocated" (click)="locate()">gps_fixed</mat-icon>
+  </button>
 </mat-form-field>
 
 <div [hidden]="matchedCities.length > 0">
