@@ -12,7 +12,7 @@ export class GeolocationService {
   constructor(private http: HttpClient) { }
 
   locate() {
-    return Observable.create(observer => {
+    return new Observable(observer => {
       navigator.geolocation.getCurrentPosition(loc => {
         observer.next(loc);
         observer.complete();
@@ -25,9 +25,8 @@ export class GeolocationService {
 
         return this.http.get(url).pipe(map((data: any) => {
           return data.name;
-        }))
+        }));
       })
     );
   }
-  
 }
