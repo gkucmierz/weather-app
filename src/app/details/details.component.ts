@@ -20,7 +20,7 @@ export class DetailsComponent implements OnInit {
     this.route.params.pipe(
       mergeMap(params => {
         this.city = params['city'];
-        return this.weather.getDetails(this.city);
+        return this.weather.getForecast(this.city);
       })
     ).subscribe(weather => {
       this.detailedWeather = weather;

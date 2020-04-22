@@ -1,7 +1,8 @@
 
-<mat-card class="card">
+<mat-card class="card"
+  [routerLink]="['/city', city]">
   
-  <mat-card-title [routerLink]="['/city', city]">
+  <mat-card-title>
     {{ city }}
   </mat-card-title>
 
