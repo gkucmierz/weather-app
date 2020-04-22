@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
 import { FavouriteService } from '../services/favourite.service';
 import { Router } from '@angular/router';
 import { UtilsService } from './../services/utils.service';
 import { CitiesService } from '../services/cities.service';
+import { SubSink } from 'subsink';
 
 const MAX_VISIBLE_CITIES = 1e3;
 
@@ -13,7 +14,8 @@ const MAX_VISIBLE_CITIES = 1e3;
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss']
 })
-export class SidenavComponent implements OnInit {
+export class SidenavComponent implements OnDestroy {
+  private subs = new SubSink();
   citiesList = [];
   matchedCities = [];
   searchString = '';
@@ -26,7 +28,7 @@ export class SidenavComponent implements OnInit {
     private utils: UtilsService,
     private cities: CitiesService) {
 
-    this.cities.getCities().subscribe(list => {
+    this.subs.sink = this.cities.getCities().subscribe(list => {
       this.citiesList = list;
       this.showCities();
     });
@@ -61,7 +63,8 @@ export class SidenavComponent implements OnInit {
     this.utils.urlNormalize(city).then(url => this.router.navigate(['/city', url]));
   }
 
-  ngOnInit() {
+  ngOnDestroy() {
+    this.subs.unsubscribe();
   }
 
 }
