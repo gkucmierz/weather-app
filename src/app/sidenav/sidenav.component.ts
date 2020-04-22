@@ -7,7 +7,7 @@ import { UtilsService } from './../services/utils.service';
 import { CitiesService } from '../services/cities.service';
 import { SubSink } from 'subsink';
 
-const MAX_VISIBLE_CITIES = 1e3;
+const MAX_VISIBLE_CITIES = 100;
 
 @Component({
   selector: 'app-sidenav',
@@ -42,8 +42,12 @@ export class SidenavComponent implements OnDestroy {
   }
 
   showCities() {
+    const phrase = this.searchString;
     const matched = this.citiesList
-      .filter(([normalized]) => normalized.includes(this.searchString))
+      .filter(([normalized]) => normalized.includes(phrase))
+      .sort((a, b) => {
+        return (b[0] === phrase) - (a[0] === phrase);
+      })
       .map(([_, city]) => city)
       .slice(0, MAX_VISIBLE_CITIES);
 
