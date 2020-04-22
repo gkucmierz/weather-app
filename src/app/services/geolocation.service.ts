@@ -18,12 +18,12 @@ export class GeolocationService {
         observer.complete();
       });
     }).pipe(
-      mergeMap(loc => {
+      mergeMap((loc: any) => {
         const lat = loc.coords.latitude;
         const lon = loc.coords.longitude;
         const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_TOKEN}`;
 
-        return this.http.get(url).pipe(map(data => {
+        return this.http.get(url).pipe(map((data: any) => {
           return data.name;
         }))
       })
