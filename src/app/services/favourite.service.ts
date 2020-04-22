@@ -38,7 +38,7 @@ export class FavouriteService {
 
   getCities() {
     return this.localStorage.getItem('cities').pipe(
-      map(citiesJson => {
+      map((citiesJson: any) => {
         try {
           const cities = JSON.parse(citiesJson);
           return Array.isArray(cities) && cities || [];
