@@ -50,8 +50,9 @@ export class SidenavComponent implements OnInit {
     this.matchedCities = matched;
   }
 
-  toggleFav(city) {
+  toggleFav(city, event) {
     this.favourite.toggleCity(city);
+    event.stopPropagation();
   }
 
   isFav(city) {

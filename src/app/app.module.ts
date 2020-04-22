@@ -11,6 +11,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatInputModule} from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import {MatRippleModule} from '@angular/material/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -39,6 +41,8 @@ import { DetailsComponent } from './details/details.component';
     MatInputModule,
     MatListModule,
     MatCardModule,
+    MatButtonModule,
+    MatRippleModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
