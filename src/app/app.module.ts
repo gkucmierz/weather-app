@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpErrorInterceptor } from './http-error.interceptor';
 import { StorageModule } from '@ngx-pwa/local-storage';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -13,6 +14,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatRippleModule} from '@angular/material/core';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +22,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TileComponent } from './dashboard/tile/tile.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { DetailsComponent } from './details/details.component';
+import { ErrorComponent } from './dialogs/error/error.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,8 @@ import { DetailsComponent } from './details/details.component';
     DashboardComponent,
     TileComponent,
     SidenavComponent,
-    DetailsComponent
+    DetailsComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,8 +47,18 @@ import { DetailsComponent } from './details/details.component';
     MatCardModule,
     MatButtonModule,
     MatRippleModule,
+    MatDialogModule,
   ],
-  providers: [],
+  providers: [
+   {
+     provide: HTTP_INTERCEPTORS,
+     useClass: HttpErrorInterceptor,
+     multi: true
+   }
+  ],
+  entryComponents: [
+    ErrorComponent,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
