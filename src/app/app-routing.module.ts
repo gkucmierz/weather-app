@@ -4,9 +4,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DetailsComponent } from './details/details.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'city/:city', component: DetailsComponent },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: 'city', redirectTo: '/dashboard', pathMatch: 'full' },
 ];
 
 

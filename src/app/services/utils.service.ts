@@ -9,9 +9,14 @@ export class UtilsService {
   constructor() { }
 
   urlNormalize(url) {
-    return normalize(url).then(norm => {
-      return norm.replace(/\s/g, '-').toLowerCase();
-    });
+    return normalize(url).then(norm => this.syncUrlNormalize(norm));
+  }
+
+  syncUrlNormalize(str) {
+    return (str
+      .replace(/[\'\‘\’]/g, '')
+      .replace(/\s/g, '-')
+      .toLowerCase());
   }
 
   normalizeDiacritics(str) {

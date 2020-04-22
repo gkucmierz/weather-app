@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
 import { FavouriteService } from '../services/favourite.service';
 import { Router } from '@angular/router';
 import { UtilsService } from './../services/utils.service';
+import { CitiesService } from '../services/cities.service';
 
+const MAX_VISIBLE_CITIES = 1e3;
 
 @Component({
   selector: 'app-sidenav',
@@ -13,29 +14,22 @@ import { UtilsService } from './../services/utils.service';
   styleUrls: ['./sidenav.component.scss']
 })
 export class SidenavComponent implements OnInit {
-  cities = [];
+  citiesList = [];
   matchedCities = [];
   searchString = '';
   fasStar = fasStar;
   farStar = farStar;
 
   constructor(
-    private http: HttpClient,
     private favourite: FavouriteService,
     private router: Router,
-    private utils: UtilsService) {
+    private utils: UtilsService,
+    private cities: CitiesService) {
 
-    this.http.get('./assets/world-cities.json')
-      .subscribe(cities => {
-        this.cities = cities.map(([original, normalized]) => {
-          if (normalized) {
-            return [normalized.toLowerCase(), original];
-          }
-          return [original.toLowerCase(), original];
-        })
-
-        this.showCities();
-      });
+    this.cities.getCities().subscribe(cities => {
+      this.citiesList = cities;
+      this.showCities();
+    });
   }
 
   onKey(event) {
@@ -46,10 +40,10 @@ export class SidenavComponent implements OnInit {
   }
 
   showCities() {
-    const matched = this.cities
+    const matched = this.citiesList
       .filter(([normalized]) => normalized.includes(this.searchString))
       .map(([_, city]) => city)
-      .slice(0, 100);
+      .slice(0, MAX_VISIBLE_CITIES);
 
     this.matchedCities = matched;
   }
